@@ -11,7 +11,29 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
 	title: "∑inyThe∑iner - JokagiDesu",
-	description: "∑inyThe∑iner - JokagiDesu - note RSS",
+  description: "∑inyThe∑iner - JokagiDesu - note RSS",
+  icons: {
+    icon: '/favicon.ico',
+  },
+  openGraph: {
+    images: [
+      {
+        url: "/profile.jpg",
+        height: 208,
+        width: 208,
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [
+      {
+        url: "/profile.jpg",
+        height: 208,
+        width: 208,
+      }
+    ]
+  }
 };
 
 export default function RootLayout({

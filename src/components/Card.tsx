@@ -27,7 +27,7 @@ export const Card = ({ story }: { story: RssPost }) => {
 	}
 
 	return (
-		<NextCard className="max-w-[400px] m-4 mx-auto">
+		<NextCard className="w-[400px] m-4 mx-auto">
 			{story.thumbnail && (
 				<CardHeader>
 						<Image
