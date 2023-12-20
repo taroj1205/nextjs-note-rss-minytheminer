@@ -4,6 +4,7 @@ import { parseStringPromise } from 'xml2js'
 export interface RssPost {
   title: string
   link: string
+  magazine?: string
   publishedAt: string
   thumbnail?: string
   description?: string
@@ -26,6 +27,7 @@ const fetchRssPosts = async (url: string, page: number): Promise<RssPost[]> => {
 
       return {
         title: entry.title[0],
+        magazine: parsedXml.rss.channel[0].title[0],
         description: entry.description[0].replace(/<\/?[^>]+(>|$)/g, "").replace("続きをみる", ""),
         link: entry.link[0],
         publishedAt: new Date(entry.pubDate[0]).toISOString(),

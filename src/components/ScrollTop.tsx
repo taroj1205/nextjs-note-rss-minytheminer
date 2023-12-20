@@ -12,12 +12,17 @@ export const ScrollTop = () => {
 		};
 	});
 
+	useEffect(() => {
+		checkScrollTop();
+	}, [])
+
 	const checkScrollTop = () => {
 		console.log(window.scrollY);
-		if (window.scrollY > 1000) {
-			setShowScroll(true);
-		} else if (window.scrollY <= 1000) {
+
+		if (window.scrollY <= 600) {
 			setShowScroll(false);
+		} else if (window.scrollY > 600) {
+			setShowScroll(true);
 		}
 	};
 
