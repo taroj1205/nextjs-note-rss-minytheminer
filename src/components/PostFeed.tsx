@@ -8,7 +8,7 @@ export const PostFeed = async () => {
 	);
 
 	return (
-		<div className="flex flex-wrap flex-row p-4">
+		<div className="flex flex-wrap flex-row p-4 max-w-4xl mx-auto">
 			{stories.map((story, index) => (
 				<Card story={story} key={index} />
 			))}

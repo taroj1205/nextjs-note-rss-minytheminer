@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
 export const ScrollTop = () => {
@@ -24,8 +25,11 @@ export const ScrollTop = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 	return (
-		<button
-			className={`fixed z-10 bottom-2 right-2 p-2 rounded-full bg-gray-200 ${showScroll ? "block" : "hidden"}`}
+		<Button
+			className={`fixed z-10 bottom-2 right-2 p-2 rounded-full ${showScroll ? "block" : "hidden"}`}
+			isIconOnly
+			color="primary"
+			variant="flat"
 			onClick={scrollTop}>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -40,6 +44,6 @@ export const ScrollTop = () => {
 					d="M4.5 15.75l7.5-7.5 7.5 7.5"
 				/>
 			</svg>
-		</button>
+		</Button>
 	);
 };
