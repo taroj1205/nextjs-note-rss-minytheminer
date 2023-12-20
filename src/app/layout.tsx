@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import { Providers } from '@/components/Providers'
 import Head from 'next/head'
 import { magazine } from '@/components/Magazines'
+import { Analytics } from '@vercel/analytics/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,7 +29,8 @@ export default function RootLayout({
 			<body className={inter.className}>
 				<Providers>
 					{children}
-					<ScrollTop />
+          <ScrollTop />
+          <Analytics />
 				</Providers>
 			</body>
 		</html>
