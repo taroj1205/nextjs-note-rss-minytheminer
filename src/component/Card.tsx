@@ -1,15 +1,8 @@
+import { RssPost } from "@/utils/rss";
 import Link from "next/link";
 
-export interface Story {
-  title: string;
-  description: string;
-  link: string;
-  thumbnail: string;
-  publishedDate: string; // or Date depending on your data source
-}
-
-export const Card = ({ story, key }: { story: Story; key: number }) => {
-  const date = new Date(story.publishedDate);
+export const Card = ({ story, key }: { story: RssPost; key: number }) => {
+  const date = new Date(story.publishedAt);
   const formattedDate = `${date.getFullYear()}年${
 		date.getMonth() + 1
 	}月${date.getDate()}日`;
