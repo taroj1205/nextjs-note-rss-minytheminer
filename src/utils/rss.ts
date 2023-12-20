@@ -1,3 +1,4 @@
+import { getThumbnail } from '@/components/Magazines'
 import axios from 'axios'
 import { parseStringPromise } from 'xml2js'
 
@@ -16,7 +17,7 @@ const fetchRssPosts = async (url: string, page: number): Promise<RssPost[]> => {
   const xml = response.data
 
   // XMLをJavaScriptオブジェクトに変換
-  const parsedXml = await parseStringPromise(xml)
+  const parsedXml = await parseStringPromise(xml);
 
   // 記事データを抽出
   const rssPosts = parsedXml.rss.channel[0].item
@@ -24,6 +25,9 @@ const fetchRssPosts = async (url: string, page: number): Promise<RssPost[]> => {
       const mediaThumbnail = entry['media:thumbnail'] ? entry['media:thumbnail'][0] : undefined
       const enclosureUrl = entry.enclosure ? entry.enclosure[0].$.url : undefined
       const channelLink = parsedXml.rss.channel[0].link[0]
+      const title = parsedXml.rss.channel[0].title[0]
+
+      const thumbnail = getThumbnail(title);
 
       return {
         title: entry.title[0],
@@ -31,13 +35,13 @@ const fetchRssPosts = async (url: string, page: number): Promise<RssPost[]> => {
         description: entry.description[0].replace(/<\/?[^>]+(>|$)/g, "").replace("続きをみる", ""),
         link: entry.link[0],
         publishedAt: new Date(entry.pubDate[0]).toISOString(),
-        thumbnail: mediaThumbnail || enclosureUrl || undefined,
+        thumbnail,
       }
     })
     : []
   //console.log('Channel:', parsedXml.rss.channel[0])
-  console.log('parsedXml', parsedXml)
-  console.log('next')
+  // console.log('parsedXml', parsedXml)
+  // console.log('next')
   return rssPosts
 }
 

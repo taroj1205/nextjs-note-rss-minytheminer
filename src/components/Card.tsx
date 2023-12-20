@@ -51,7 +51,7 @@ export const Card = ({ story }: { story: RssPost }) => {
 			</CardBody>
 			<Divider />
 			<CardFooter>
-				<Link isExternal showAnchorIcon href={story.link}>
+				<Link isExternal showAnchorIcon href={story.link} className="cursor-pointer">
 					もっと読む
 				</Link>
 			</CardFooter>

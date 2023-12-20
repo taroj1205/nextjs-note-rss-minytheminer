@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import Loading from "./loading";
 import { PostFeed } from "@/components/PostFeed";
-import { Pagination } from "@nextui-org/react";
+import { GoHome } from "@/components/GoHome";
 
 const Page = ({ params }: { params: { slug: string } }) => {
 	const slug = params.slug;
@@ -11,6 +11,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
 			<Suspense fallback={<Loading />}>
 				<PostFeed url={url} />
 			</Suspense>
+			<GoHome />
 		</>
 	);
 };

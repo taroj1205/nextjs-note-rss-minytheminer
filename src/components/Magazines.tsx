@@ -7,17 +7,16 @@ import {
 	Divider,
 	Link as NextLink,
 	Image,
-	Skeleton,
 } from "@nextui-org/react";
 import Link from "next/link";
 
 export const magazine: { [key: string]: RssPost } = {
-	"速く走りたいので、スピードに極振りしました": {
+	速く走りたいのでスピードに極振りしました: {
 		publishedAt: "Wed, 15 Feb 2023 14:05:13 +0900",
 		link: "https://note.com/minytheminer/m/m00f9e97acc80/rss",
 		thumbnail:
 			"https://assets.st-note.com/production/uploads/images/98143384/3b3f25324600071f0c1c1c41c0c37434.png?width=800",
-		title: "速く走りたいので、スピードに極振りしました",
+		title: "速く走りたいのでスピードに極振りしました",
 		description:
 			"速く走りたいのでスピードに極振りしました。 VRの世界で、いろいろ楽しみ、本物の世界とVRの世界が入り混じってしまったことまであった。",
 	},
@@ -73,6 +72,13 @@ export const magazine: { [key: string]: RssPost } = {
 	},
 };
 
+export const getThumbnail = (title: string): string | undefined => {
+	const story = Object.values(magazine).find((story) => story.title === title);
+
+	console.log(story?.thumbnail, title);
+	return story?.thumbnail;
+};
+
 export const Magazines = () => {
 	return (
 		<div className="flex flex-wrap flex-row p-4 max-w-4xl mx-auto">
@@ -100,7 +106,7 @@ const Card = ({ story }: { story: RssPost }) => {
 						height={200}
 						radius="sm"
 						src={story.thumbnail}
-            width="100%"
+						width="100%"
 					/>
 				</CardHeader>
 			)}
@@ -116,7 +122,7 @@ const Card = ({ story }: { story: RssPost }) => {
 			</CardBody>
 			<Divider />
 			<CardFooter>
-				<NextLink as={Link} href={"/magazine/" + magazineId}>
+				<NextLink className="cursor-pointer" as={Link} href={"/magazine/" + magazineId}>
 					もっと読む
 				</NextLink>
 			</CardFooter>

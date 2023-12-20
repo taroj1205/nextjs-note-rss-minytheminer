@@ -3,7 +3,8 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Providers } from '@/components/Providers'
-import { GoHome } from '@/components/GoHome'
+import Head from 'next/head'
+import { magazine } from '@/components/Magazines'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,10 +20,14 @@ export default function RootLayout({
 }) {
   return (
 		<html lang="en" className="dark">
+			<Head>
+				{Object.values(magazine).map((story, index) => (
+					<link key={index} rel="preload" href={story.thumbnail} as="image" />
+				))}
+			</Head>
 			<body className={inter.className}>
 				<Providers>
-          {children}
-          <GoHome />
+					{children}
 					<ScrollTop />
 				</Providers>
 			</body>
