@@ -9,7 +9,7 @@ const LoadingSkeleton = () => {
 			{Array(20)
 				.fill(0)
 				.map((_, i) => (
-					<div className="border border-gray-200 rounded-lg overflow-hidden m-4 w-[24rem] mx-auto">
+					<div key={i} className="border border-gray-200 rounded-lg overflow-hidden m-4 w-[24rem] mx-auto">
 						<div className="w-full h-48 bg-gray-200 animate-pulse" />
 
 						<div className="p-5">
