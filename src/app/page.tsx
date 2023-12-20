@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Loading from "./loading";
-import { PostFeed } from "@/component/PostFeed";
+import { PostFeed } from "@/components/PostFeed";
 
 const Page = () => {
 	return (

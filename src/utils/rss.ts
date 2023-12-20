@@ -3,49 +3,40 @@ import { parseStringPromise } from 'xml2js'
 
 export interface RssPost {
   title: string
-  description: string
   link: string
   publishedAt: string
   thumbnail?: string
+  description?: string
 }
 
-const fetchRssPosts = async (url: string): Promise<RssPost[]> => {
-  let page = 1;
-  let allPosts: RssPost[] = [];
+const fetchRssPosts = async (url: string, page: number): Promise<RssPost[]> => {
+  // RSSフィードを取得
+  const response = await axios.get(url+`?page=${page}`)
+  const xml = response.data
 
-  while (true) {
-    // Fetch the RSS feed
-    const response = await axios.get(`${url}?page=${page}`);
-    const xml = response.data;
+  // XMLをJavaScriptオブジェクトに変換
+  const parsedXml = await parseStringPromise(xml)
 
-    // Convert XML to JavaScript object
-    const parsedXml = await parseStringPromise(xml);
+  // 記事データを抽出
+  const rssPosts = parsedXml.rss.channel[0].item
+    ? parsedXml.rss.channel[0].item.map((entry: any): RssPost => {
+      const mediaThumbnail = entry['media:thumbnail'] ? entry['media:thumbnail'][0] : undefined
+      const enclosureUrl = entry.enclosure ? entry.enclosure[0].$.url : undefined
+      const channelLink = parsedXml.rss.channel[0].link[0]
 
-    // Extract post data
-    const rssPosts = parsedXml.rss.channel[0].item
-      ? parsedXml.rss.channel[0].item.map((entry: any): RssPost => {
-          const mediaThumbnail = entry['media:thumbnail'] ? entry['media:thumbnail'][0] : undefined;
-          const enclosureUrl = entry.enclosure ? entry.enclosure[0].$.url : undefined;
-
-          return {
-            title: entry.title[0],
-            description: entry.description[0].replace(/<\/?[^>]+(>|$)/g, "").replace("続きをみる", ""),
-            link: entry.link[0],
-            publishedAt: new Date(entry.pubDate[0]).toISOString(),
-            thumbnail: mediaThumbnail || enclosureUrl || undefined,
-          };
-        })
-      : [];
-
-    if (rssPosts.length === 0) {
-      break;
-    }
-
-    allPosts = [...allPosts, ...rssPosts];
-    page++;
-  }
-
-  return allPosts;
+      return {
+        title: entry.title[0],
+        description: entry.description[0].replace(/<\/?[^>]+(>|$)/g, "").replace("続きをみる", ""),
+        link: entry.link[0],
+        publishedAt: new Date(entry.pubDate[0]).toISOString(),
+        thumbnail: mediaThumbnail || enclosureUrl || undefined,
+      }
+    })
+    : []
+  //console.log('Channel:', parsedXml.rss.channel[0])
+  console.log('parsedXml', parsedXml)
+  console.log('next')
+  return rssPosts
 }
 
 export { fetchRssPosts }

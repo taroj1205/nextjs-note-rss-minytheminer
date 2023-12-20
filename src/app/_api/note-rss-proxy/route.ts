@@ -3,8 +3,10 @@ import axios from 'axios'
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const url = String(searchParams.get('url'));
+  const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+
   try {
-    const response = await axios.get(url, { responseType: 'text' })
+    const response = await axios.get(proxyUrl + url, { responseType: 'text' })
 
     return new Response(response.data, {
       headers: {
