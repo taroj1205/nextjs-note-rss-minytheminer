@@ -1,35 +1,39 @@
 "use client";
 import { Button, Spinner } from "@nextui-org/react";
-import { createContext, useContext, Dispatch, SetStateAction, useState, useEffect } from "react";
+import {
+	createContext,
+	useContext,
+	Dispatch,
+	SetStateAction,
+	useState,
+	useEffect,
+} from "react";
+import { useStoryState } from "./Posts";
 
 export const SortContext = createContext({
 	sort: "oldest",
-  setSort: (() => { }) as Dispatch<SetStateAction<string>>,
+	setSort: (() => {}) as Dispatch<SetStateAction<string>>,
 });
 
 export const useSort = () => useContext(SortContext);
 
 export const SortMagazine = () => {
 	const sortOption = ["oldest", "newest"];
-  const { sort, setSort } = useSort();
-  const [isLoading, setIsLoading] = useState(false);
+	const { sort, setSort } = useSort();
+	const { isLoading } = useStoryState();
 
 	const sortItems = () => {
-    console.log(sortOption);
+		console.log(sortOption);
 		setSort(sort === "oldest" ? "newest" : "oldest");
-  };
-  
-  useEffect(() => {
-    setIsLoading(false);
-  }, [])
+	};
 
 	return (
 		<Button
-			className="fixed z-10 bottom-2 left-12 p-2 rounded-full"
+			className="fixed z-10 bottom-2 left-14 p-2 rounded-full"
 			isIconOnly
 			color="secondary"
-      variant="flat"
-      disabled={isLoading}
+			variant="flat"
+			disabled={isLoading}
 			onClick={sortItems}>
 			{isLoading ? (
 				<Spinner />
