@@ -31,12 +31,12 @@ export const SortMagazine = () => {
 		<Button
 			className="fixed z-10 bottom-2 left-14 p-2 rounded-full"
 			isIconOnly
-			color="secondary"
-			variant="flat"
+			color="warning"
+			variant="faded"
 			disabled={isLoading}
 			onClick={sortItems}>
 			{isLoading ? (
-				<Spinner />
+				<Spinner size="sm" />
 			) : (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"

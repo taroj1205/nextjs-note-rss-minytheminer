@@ -29,10 +29,10 @@ export const ScrollTop = () => {
 	};
 	return (
 		<Button
-			className={`fixed z-10 bottom-2 right-2 p-2 rounded-full ${showScroll ? "block" : "hidden"}`}
+			className={`fixed z-10 bottom-2 right-2 p-2 rounded-full ${showScroll ? "" : "hidden"}`}
 			isIconOnly
 			color="primary"
-			variant="flat"
+			variant="faded"
 			onClick={scrollTop}>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"

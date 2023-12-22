@@ -8,8 +8,8 @@ export const GoHome = () => {
 		<Button
 			className={`fixed z-10 bottom-2 left-2 p-2 rounded-full`}
 			isIconOnly
-			color="primary"
-			variant="flat"
+			color="danger"
+			variant="faded"
 			as={Link}
 			href="/">
 			<FaHome size={20} />
