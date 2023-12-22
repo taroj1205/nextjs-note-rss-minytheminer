@@ -46,7 +46,7 @@ export const Card = ({ story }: { story: RssPost }) => {
 					<p className="mb-4 text-clip overflow-hidden line-clamp-5">
 						{story.description}
 					</p>
-					<p className="text-gray-500 flex">{formattedDate}</p>
+					<p className="text-gray-400 flex">{formattedDate}</p>
 				</div>
 			</CardBody>
 			<Divider />
