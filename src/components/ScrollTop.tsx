@@ -17,8 +17,6 @@ export const ScrollTop = () => {
 	}, [])
 
 	const checkScrollTop = () => {
-		console.log(window.scrollY);
-
 		if (window.scrollY <= 600) {
 			setShowScroll(false);
 		} else if (window.scrollY > 600) {

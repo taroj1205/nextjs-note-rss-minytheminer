@@ -1,5 +1,6 @@
 import { RssPost, fetchRssPosts } from "@/utils/rss";
-import { Card } from "./Card";
+import { notFound } from "next/navigation";
+import { Posts } from "./Posts";
 
 export const PostFeed = async ({ url }: { url: string }) => {
 	let page = 1;
@@ -7,6 +8,9 @@ export const PostFeed = async ({ url }: { url: string }) => {
 
 	while (true) {
 		const newStories = await fetchRssPosts(url, page);
+		if (stories.length === 0 && newStories.length === 0) {
+			notFound();
+		}
 		if (newStories.length === 0) {
 			break; // No more stories, exit the loop
 		}
@@ -23,11 +27,7 @@ export const PostFeed = async ({ url }: { url: string }) => {
 					{stories[0].magazine}
 				</h2>
 			</div>
-			<div className="flex flex-wrap flex-row p-4 max-w-4xl mx-auto">
-				{[...stories].reverse().map((story, index) => (
-					<Card story={story} key={index} />
-				))}
-			</div>
+			<Posts stories={stories} />
 		</>
 	);
 };

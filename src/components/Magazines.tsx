@@ -75,7 +75,6 @@ export const magazine: { [key: string]: RssPost } = {
 export const getThumbnail = (title: string): string | undefined => {
 	const story = Object.values(magazine).find((story) => story.title === title);
 
-	console.log(story?.thumbnail, title);
 	return story?.thumbnail;
 };
 
@@ -122,7 +121,10 @@ const Card = ({ story }: { story: RssPost }) => {
 			</CardBody>
 			<Divider />
 			<CardFooter>
-				<NextLink className="cursor-pointer" as={Link} href={"/magazine/" + magazineId}>
+				<NextLink
+					className="cursor-pointer"
+					as={Link}
+					href={"/magazine/" + magazineId}>
 					もっと読む
 				</NextLink>
 			</CardFooter>
